@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe "Question Groups" do
+
+  def rapidfire # refactor
+    Rapidfire::Engine.routes.url_helpers
+  end
+
   let(:question_group)  { FactoryGirl.create(:question_group, name: "Question Set") }
   let(:question1)  { FactoryGirl.create(:q_long,  question_group: question_group, question_text: "Long Question", validation_rules: { presence: "1" })  }
   let(:question2)  { FactoryGirl.create(:q_short, question_group: question_group, question_text: "Short Question") }
