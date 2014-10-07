@@ -31,6 +31,19 @@ describe Rapidfire::QuestionForm do
     end
   end
 
+  describe "#default_position" do
+    let(:proxy)  { described_class.new(question_group: question_group) }
+
+    context "when the question group has one question" do
+      let(:question)  { FactoryGirl.create(:q_checkbox, question_group: question_group) }
+      let(:proxy)     { described_class.new(question_group: question_group, question: question) }
+
+      it "should be the next number sequentially" do
+        proxy.default_position.should == 2
+      end
+    end
+  end
+
   describe "#save" do
     before(:each)  { proxy.save }
 
@@ -58,6 +71,10 @@ describe Rapidfire::QuestionForm do
           proxy.question.question_text.should == "Your mood today"
           proxy.question.options.should =~ ["good", "bad"]
         end
+
+        it "should have a position equal to the number of questions belonging to the question group" do
+          proxy.question.position.should == proxy.question_group.questions.count
+        end
       end
 
       context "when question params are invalid" do
@@ -81,12 +98,17 @@ describe Rapidfire::QuestionForm do
       end
 
       let(:params) do
-        { question_text: "Changing question text" }
+        { question_text: "Changing question text", position: 25 }
       end
 
       it "updates the question" do
         proxy.errors.should be_empty
         proxy.question.question_text.should == "Changing question text"
+      end
+
+      it "updates the position" do
+        proxy.question_position.should == 25
+        puts proxy.question.inspect
       end
     end
   end
