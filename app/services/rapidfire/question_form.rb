@@ -29,7 +29,6 @@ module Rapidfire
     end
 
     def initialize(params = {})
-      puts "params", params
       from_question_to_attributes(params[:question]) if params[:question]
       super(params)
       @question ||= question_group.questions.new
