@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141103195345) do
+ActiveRecord::Schema.define(version: 20141103195651) do
 
   create_table "rapidfire_answer_groups", force: true do |t|
     t.integer  "question_group_id"
@@ -39,7 +39,8 @@ ActiveRecord::Schema.define(version: 20141103195345) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "published",  default: false
+    t.boolean  "published",   default: false
+    t.string   "access_code"
   end
 
   create_table "rapidfire_questions", force: true do |t|
