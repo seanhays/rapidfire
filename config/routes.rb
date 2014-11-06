@@ -1,6 +1,7 @@
 Rapidfire::Engine.routes.draw do
   resources :question_groups do
     get 'results', on: :member
+    get 'success', on: :member
 
     resources :questions
     resources :answer_groups
