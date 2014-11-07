@@ -18,7 +18,9 @@ module Rapidfire
               text.split(',') if !text.nil?
             end
             answers = answers.flatten
-            answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
+            totals = answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
+            (question.answer_options.split("\r\n") - totals.keys).each { |x| totals[x] = 0 }
+            totals
           when Rapidfire::Questions::Short, Rapidfire::Questions::Date,
             Rapidfire::Questions::Long, Rapidfire::Questions::Numeric
             question.answers.pluck(:answer_text)
