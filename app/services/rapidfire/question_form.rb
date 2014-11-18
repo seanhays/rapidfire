@@ -20,7 +20,8 @@ module Rapidfire
     attr_accessor :question_group, :question,
       :type, :question_text, :position, :answer_options, :answer_presence,
       :answer_minimum_length, :answer_maximum_length, :render_type,
-      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to
+      :answer_greater_than_or_equal_to, :answer_less_than_or_equal_to,
+      :question_layout_type
 
     delegate :valid?, :errors, :id, :to => :question
 
@@ -70,6 +71,7 @@ module Rapidfire
         :answer_options => answer_options,
         :position => question_position,
         :render_type => render_type,
+        :question_layout_type => question_layout_type,
         :validation_rules => {
           :presence => answer_presence,
           :minimum  => answer_minimum_length,
@@ -85,7 +87,7 @@ module Rapidfire
       self.question_group  = question.question_group
       self.question_text   = question.question_text
       self.position = question.position
-      self.render_type = question.render_type
+      self.question_layout_type = question.question_layout_type
       self.answer_options  = question.answer_options
       self.answer_presence = question.rules[:presence]
       self.answer_minimum_length = question.rules[:minimum]
