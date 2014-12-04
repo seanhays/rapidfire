@@ -87,6 +87,7 @@ module Rapidfire
       self.question_group  = question.question_group
       self.question_text   = question.question_text
       self.position = question.position
+      self.render_type = question.render_type
       self.question_layout_type = question.question_layout_type
       self.answer_options  = question.answer_options
       self.answer_presence = question.rules[:presence]
