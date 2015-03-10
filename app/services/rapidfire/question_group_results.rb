@@ -15,9 +15,12 @@ module Rapidfire
           when Rapidfire::Questions::Select, Rapidfire::Questions::Radio,
             Rapidfire::Questions::Checkbox
             answers = question.answers.map(&:answer_text).map do |text|
-              text.split(',') if !text.nil?
-            end
-            answers = answers.flatten
+            #   text.split(',') if !text.nil?
+            # end
+            # answers = answers.flatten
+              text.to_s.split(Rapidfire.answers_delimiter)
+            end.flatten
+            
             totals = answers.inject(Hash.new(0)) { |total, e| total[e] += 1; total }
             (question.answer_options.split("\r\n") - totals.keys).each { |x| totals[x] = 0 }
             totals
